@@ -51,9 +51,9 @@ Summary
 
 The system consists of:
 
-1. API Python FastAPI + MongoDB.
+1. API Python FastAPI + MongoDB
 2. WEB System Python Django + PostgreSQL
-3. API Python FastAPI.
+3. API Python FastAPI
 4. Docker + Docker-compose
 
 Organization:
@@ -116,7 +116,7 @@ Once your logged in, the http://0.0.0.0:8000 will redirect you to
 
 1. After clicking in "START", the start button will freeze and the end button will start to be available. After clicking in "END" the system will calculate if there was a fraud between this two clicks time. If you dont click in "END", the event will not be registered.
 2. The system will always return the results analysis, even if we don't have any data recorded in this meantime.
-3. If some problem with the connection between the services occur, the system will return an error page.
+3. If some problem with the connection between the services occurs, the system will return an error page.
 
 ![Image Alt text](/readme_images/result.png)
 
@@ -135,11 +135,11 @@ The Django framework provides an admin tool that allow us to manage users access
 
 ## Using the APIs
 
-* Inside the sensor receiver API, besides using the functionalities, we are able to run 2 mocks that create registers for a 4 minute event.
+* Inside the **sensor receiver API**, besides using the functionalities, we are able to run 2 mocks that create registers for a 4 minute event.
 
 ![Image Alt text](/readme_images/sensorapi.png)
 
-* Inside the consultive API, we need to click in the "Authorize" button and use the credentials created in the setup process or inside the Django Admin's page.
+* Inside the **consultive API**, we need to click in the "Authorize" button and use the credentials created in the setup process or inside the Django Admin's page.
 
 ![Image Alt text](/readme_images/consultiveapi.png)
 
