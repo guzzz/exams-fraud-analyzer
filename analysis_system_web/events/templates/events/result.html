@@ -53,14 +53,14 @@
       const bp_label = '# Blood Pressure Measures'
       var bp_x = {{ bp_x|safe }};
       var bp_y = {{ bp_y|safe }};
-      const bp_color = "rgba(255,128,128,0.8)";
+      const bp_color = "rgba(160,208,246,1)";
       generateChart(bp_chart, bp_label, bp_x, bp_y, bp_color)
 
       const hr_chart = document.getElementById('hrChart');
       const hr_label = '# Heart Rate Measures'
       var hr_x = {{ hr_x|safe }};
       var hr_y = {{ hr_y|safe }};
-      const hr_color = "rgba(160,208,246,1)";
+      const hr_color = "rgba(255,128,128,0.8)";
       generateChart(hr_chart, hr_label, hr_x, hr_y, hr_color)
 
       function generateChart(chart, label, x_list, y_list, bg_rgb) {
