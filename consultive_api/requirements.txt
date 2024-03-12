@@ -1,0 +1,17 @@
+
+# Base
+fastapi==0.110.0
+structlog==24.1.0
+pytest==8.0.2
+
+# Database
+sqlalchemy==2.0.25
+psycopg2==2.9.9
+
+# Security
+PyJWT==2.8.0
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Date
+pytz==2024.1

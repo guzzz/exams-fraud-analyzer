@@ -1,0 +1,10 @@
+
+# Database
+pymongo==4.6.2
+
+# Base
+structlog==24.1.0
+
+# Tests
+pytest==8.0.2
+httpx==0.27.0

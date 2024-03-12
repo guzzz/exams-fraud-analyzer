@@ -1,0 +1,103 @@
+
+<script
+  src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+  integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+  crossorigin="anonymous">
+</script>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register Event Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+
+    {% load widget_tweaks %}
+
+    <div class="container">
+        <div class="alert alert-light mt-3" role="alert">
+            Events are only processed after click in "End"
+        </div>
+        <h1 class="mb-3">Event Register</h1>
+        <form class="row g-3" method="post" id="form-form">
+            {% csrf_token %}
+            <div class="col-sm-12 col-md-6">
+                <label for="id_title" class="form-label">Title</label>
+                <input class="form-control" type="text" name="title" maxlength="50" required="" id="id_title">
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label for="id_person" class="form-label">Person</label>
+                {% render_field form.person class="form-select" name="person" %}
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label for="id_base_blood_pressure" class="form-label">Base Blood Pressure</label> 
+                <input class="form-control" type="number" name="base_blood_pressure" min="0" required="" id="id_base_blood_pressure">
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <label for="id_blood_pressure_monitor" class="form-label">Blood pressure monitor</label>
+                {% render_field form.blood_pressure_monitor class="form-select" name="blood_pressure_monitor" %}
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+                <label for="id_base_heart_rate" class="form-label">Base Heart Rate</label>
+                <input class="form-control" type="number" name="base_heart_rate" min="0" required="" id="id_base_heart_rate">
+            </div>
+
+            <div class="col-sm-12 col-md-6">
+                <label for="id_heart_rate_monitor" class="form-label">Heart rate monitor</label>
+                {% render_field form.heart_rate_monitor class="form-select" name="heart_rate_monitor" %}
+            </div>
+
+            <input type="hidden" name="start_date" min="0" id="id_start_date"> 
+            <input type="hidden" name="end_date" min="0" id="id_end_date"> 
+
+            <div class="d-grid gap-2 col-sm-12 col-md-6">
+                <button id="start-button" type="button" class="btn btn-primary">Start</button>
+            </div>
+            <div class="d-grid gap-2 col-sm-12 col-md-6">
+                <button id="end-button" type="submit" class="btn btn-secondary" disabled>End</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        function generateDatetime() {
+            const dt = new Date();
+            return dt.toISOString();
+        }
+        $("#start-button").click(function () {
+            if (! $('#form-form')[0].checkValidity()) {
+                $('#form-form')[0].reportValidity()
+            } else {
+                $('#start-button').prop('disabled', true)
+                $('#id_title').prop('disabled', true)
+                $('#id_person').prop('disabled', true)
+                $('#id_base_blood_pressure').prop('disabled', true)
+                $('#id_base_heart_rate').prop('disabled', true)
+                $('#id_blood_pressure_monitor').prop('disabled', true)
+                $('#id_heart_rate_monitor').prop('disabled', true)
+
+                $("#id_start_date").val(generateDatetime());
+                $('#end-button').prop('disabled', false)
+            }
+
+        });
+        $("#form-form").on("submit", function(event) {
+            $('#start-button').prop('disabled', true)
+
+            $('#id_title').prop('disabled', false)
+            $('#id_person').prop('disabled', false)
+            $('#id_base_blood_pressure').prop('disabled', false)
+            $('#id_base_heart_rate').prop('disabled', false)
+            $('#id_blood_pressure_monitor').prop('disabled', false)
+            $('#id_heart_rate_monitor').prop('disabled', false)
+
+            $("#id_end_date").val(generateDatetime());
+        });
+    </script>
+  </body>
+</html>

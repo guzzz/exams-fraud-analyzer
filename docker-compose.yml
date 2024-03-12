@@ -1,0 +1,80 @@
+services:
+
+  mongodb_sensor_receiver:
+    image: mongo:7.0.5
+    container_name: mongodb-sensor-receiver
+    env_file:
+      - databases/mongo_configs/.env
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - 27017:27017
+
+  sensor_receiver_api:
+    image: sensor-receiver-api:dev
+    container_name: sensor-receiver-api
+    build:
+      dockerfile: sensor_receiver_api/Dockerfile
+    command: uvicorn sensor_receiver_api.main:app --reload --workers 1 --host 0.0.0.0 --port 8001
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 8001:8001
+    env_file:
+      - sensor_receiver_api/.env
+    depends_on:
+      - mongodb_sensor_receiver
+
+  consultive_api:
+    image: consultive-api:dev
+    container_name: consultive-api
+    build:
+      dockerfile: consultive_api/Dockerfile
+    command: uvicorn consultive_api.main:app --reload --workers 1 --host 0.0.0.0 --port 8001
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 8002:8001
+    env_file:
+      - consultive_api/.env
+    depends_on:
+      - postgres
+
+  mongo-express:
+    image: mongo-express:1.0.2-20
+    container_name: mongo-express
+    env_file:
+      - databases/mongo_express/.env
+    depends_on:
+      - mongodb_sensor_receiver
+    ports:
+      - 8081:8081
+
+  postgres:
+    image: postgres:16.1
+    container_name: postgres
+    env_file:
+      - databases/postgres_configs/.env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+        - 5432:5432
+
+  analysis_system_web:
+    image: analysis-system-web:dev
+    container_name: analysis-system-web
+    build:
+      dockerfile: analysis_system_web/Dockerfile
+    env_file:
+      - analysis_system_web/.env
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+
+volumes:
+  postgres-data:
+    name: postgres-data
+  mongodb-data:
+    name: mongodb-data
