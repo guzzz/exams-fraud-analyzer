@@ -118,7 +118,7 @@ Once your logged in, the http://0.0.0.0:8000 will redirect you to
 2. The system will always return the results analysis, even if we don't have any data recorded in this meantime.
 3. If some problem with the connection between the services occurs, the system will return an error page.
 
-![Image Alt text](/readme_images/result.png)
+![Image Alt text](/readme_images/result2.png)
 
 ![Image Alt text](/readme_images/error.png)
 
