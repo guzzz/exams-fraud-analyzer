@@ -36,6 +36,7 @@ Summary
       * [Custom Templates](#custom-templates)
       * [Django Admin](#django-admin)
    * [Using the APIs](#using-the-apis)
+      * [About the mocks](#about-the-mocks)
    * [Makefile](#makefile)
    * [Requirements](#requirements)
 
@@ -136,6 +137,14 @@ The Django framework provides an admin tool that allow us to manage users access
 ## Using the APIs
 
 * Inside the **sensor receiver API**, besides using the functionalities, we are able to run 2 mocks that create registers for a 4 minute event.
+
+#### About the mocks
+
+* The mocks are using:
+   * Samsung X1-S / 1.1 (Blood Pressure Monitor)
+   * Samsung BPA / 1.3 (Heart Rate Monitor)
+
+* _Obs.: It's important to remeber that if an event is started but the correct monitors selected in the form are not the ones that are actually runnig, the event will still be processed aiming to the selected monitors, resulting in an empty graph in the template._
 
 ![Image Alt text](/readme_images/sensorapi.png)
 
